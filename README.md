@@ -1,6 +1,15 @@
 # Monte Carlo from CSV input
 
-This is a set of scripts that will run a Monte Carlo simulation from the contents of a CSV file, from the command line.
+This is a set of scripts that will run a Monte Carlo simulation from the contents of a CSV file, from the command line. If you're 
+used to following Scrum with sprints and you'd like to explore the continuous flow of Kanban, and would like to know how well a Monte
+Carlo simulation can answer the question "When might this number of items be done?" based on your own historical data, you can use this.
+
+Example: If you're used to using epics, and you can say on which dates past epics were completed, and you know how many epics you want
+to complete in the future, you can create a CSV file containing the dates when past epics were completed and a count of completed epics
+for each date in the CSV. If you have a record of completions for individual tasks, and you have a task breakdown for the future work, 
+use that.   If you have historical data from before a recently completed project and you want to see how accurately an MC forecast
+would have been for your just-finishe project, you can create a CSV file with the historical data from before this project, and ask
+this tool to forecast how long it would take to complete the tasks you knew about at the start of the project.
 
 ## 1) Setting up to run the scripts
 

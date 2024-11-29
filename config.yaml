@@ -1,0 +1,16 @@
+  # Set use_sprints to 'false' if your CSV contains individual dates when items were completed.
+  # Set use_sprints to 'true' if your CSV contains sprint numbers instead.
+source_data:
+  data_file: ../dates_and_counts.csv
+  use_sprints: false
+
+Projections:
+  future_event_count: 10
+  percentile: 85
+  simulations: 1000
+
+# TODO
+#Logging:
+#  log_file: ./montecarlo.log
+#  log_level: DEBUG
+

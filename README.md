@@ -31,6 +31,7 @@ If you already have python3 and virtual environments set up, skip to installing 
 ### 1.1) Set up your environment. Specifics will depend on your operating system. 
 - Install Python3
   For a mac: https://docs.python-guide.org/starting/install3/osx/
+  For Windows: https://www.google.com/   :-) 
 
 ### 1.2) To isolate python dependences, use a virtual environment. Set one up with pip:
   https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
@@ -47,6 +48,8 @@ $ source .venv/bin/activate
 ```
 
 ### 1.4) Prepare pip
+If you need to install pip, do so. Here is a link for MacOS: https://www.geeksforgeeks.org/how-to-install-pip-in-macos/
+
 ```
 $ python3 -m pip install --upgrade pip
 $ python3 -m pip --version
@@ -57,8 +60,7 @@ $ python3 -m pip --version
 `$ python3 -m pip install -r requirements.txt`
 
 ### 1.6) Make sure it runs with the sample configuration file and sample data.
-`$ python3 MonteCarlo.py config.yaml`
-
+`$ ./run_simulation.sh`
 
 ## Section 2) Running a Monte Carlo simulation on your data
 

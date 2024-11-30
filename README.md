@@ -30,8 +30,9 @@ If you already have python3 and virtual environments set up, skip to installing 
 
 ### 1.1) Set up your environment. Specifics will depend on your operating system. 
 - Install Python3
-  For a mac: https://docs.python-guide.org/starting/install3/osx/
-  For Windows: https://www.google.com/   :-) 
+  * For a mac: https://docs.python-guide.org/starting/install3/osx/
+  * For Windows: https://www.google.com/   :-)
+  * For Linux: You don't need me to tell you! :-D 
 
 ### 1.2) To isolate python dependences, use a virtual environment. Set one up with pip:
   https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/

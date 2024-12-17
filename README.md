@@ -1,20 +1,30 @@
 # Monte Carlo from CSV input
 
-This is a set of scripts that will run a Monte Carlo simulation from the contents of a CSV file, from the command line. If you're 
-used to following Scrum with sprints and you'd like to explore the continuous flow of Kanban, and would like to know how well a Monte
-Carlo simulation can answer the question "When might this number of items be done?" based on your own historical data, you can use this.
+## Why use this?
+Monte Carlo simulations are one way to answer "When will it be done?" for software projects that use a Kanban workflow. It will tell you, based on historical data, future calendar dates with probabilities of completing by then. For example, 85% of the simulations completed all of the tasks by MM-DD-YYYY.    All you need are the dates upon which similar items were completed in the past, and a count of how many items were completed on those dates.
 
-I was working in a company dedicated to Scrum for software project work and using story points to forecast how long a project might take to 
-complete. I'd heard about companies finding that Kanban worked better for them, and they don't use story points; instead they make sure
+Monte Carlo has several advantages over using story points:
+
+- If you are able to consistently break down work into "small enough" pieces, you can use MC without knowing the sizes of the individual pieces more precisely. The pieces do not need to be the same size as each other, as long as they're not too big. This is similar to a common scrum practice of "If it's bigger than an 8, break it down," so if you already do this, your data might be the right kind of data.
+
+- If your work breakdowns are at a level that do no require deep technical dives and technical breakdowns, then you can use MC to make forecasts without such deep dives. That means if you regularly identify a trackable level above the technical tasks, whether they be user stories or mini milestones or whatever you call them, you can use those instead of the detailed technical tasks. And if you're able to identify that breakdown without the more time consuming technical breakdown in a meaningful way, you can use MC simulations before doing the deep dive.
+
+- Monte Carlo simulates give you calendar dates. Yes, you do need to apply judgement to interpreting them, the same as you should with any forecasting method. Considering factors such as whether your team size has changed, or were there significant interruptions in the past or will there be coming up. And if you change the nature of the work item you're tracking or doing, that will effect results.
+
+Both of the above points mean that, if you have the data, you can get meaningful forecasts faster. 
+
+If you follow a common practice of loading up a sprint with tasks at the start, and aim to complete them all before the end of the sprint, instead of following a continuous flow, you'll find the ranges given by a MC forecast will be wider. Switching to a continous flow will make MC forecasts more useful.
+
+Would you like to use past data to forecast a project you already completed, to see how close a Monte Carlo simulation came to
+reality? Would you like to make a forecast on an upcoming project? On an ongoing project?
+
+This is a set of scripts that will run a Monte Carlo simulation from the contents of a CSV file, from the command line. 
+
+## Motivation behind this project
+I've worked for multiple companys dedicated to using Scrum, and using story points for forecasting. I was looking for a way to get early forecasts faster and without involving all the people you need for a meaningful technical breakdown and story point exercise, and a better way to update forecasts as a project progresses. I'd heard that some companies find that Kanban worked better for them, and they don't use story points; instead they make sure
 all tasks are broken down small enough (akin to "If it's bigger than an 8, break it down or make it smaller", a common practice among
 teams that follow scrum) and then use Monte Carlo to answer the question "How long will the set of items for this project take to
 complete?" I wanted to explore how to use Monte Carlo using my own data, not a Jira plugin. This tool accomplishes that goal. 
-
-A nice thing about Monte Carlo is that it can be used on any type of work breakdown, which means it can solve a problem for software
-companies; there is often value in getting a loose idea of how long a project might take prior to investing in a thorough technical 
-breakdown. When projects can be broken down by epics or mini-milestones that are all "no bigger than a breadbox" consistently, and
-the breakdown does not need a thorough technical analysis, then Monte Carlo can be used to get that idea when applied to that level
-of breakdown. 
 
 Example: If you're used to using epics, and you can say on which dates past epics were completed, and you know how many epics your
 upcoming project will contain, you can create a CSV file containing the dates when past epics were completed and a count of completed epics

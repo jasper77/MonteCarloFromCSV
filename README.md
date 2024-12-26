@@ -56,7 +56,7 @@ The above points mean that, if you have the data, you can get meaningful forecas
 
 If you follow a common practice of loading up a sprint with tasks at the start, and aim to complete them all before 
 the end of the sprint, instead of following a continuous flow, you'll find the ranges given by a MC forecast will be 
-wider. Switching to a continous flow will make MC forecasts more useful.
+wider. Switching to a continuous flow will make MC forecasts more useful.
 
 Would you like to use past data to forecast a project you already completed, to see how close a Monte Carlo simulation 
 came to reality? Would you like to make a forecast on an upcoming project? On an ongoing project?
@@ -167,13 +167,17 @@ Make a copy of the configuration file or edit the example included. Be sure it r
 `$ ./mc_by_dates.py <config_file>`
 
 ## Interpreting the results:
-```
 Results are sent to stdout. 
-Example output:
+Example:
+```
+% ./run_simulation.sh
+Reading from ../dates_and_counts.csv
+Projecting 10 items for 85 percentile
+Using 1000 simulations
 Monte Carlo Simulation Results:
-50th Percentile (Median): 2024-01-21
-85th Percentile: 2024-01-23
-95th Percentile: 2024-01-23
+50th Percentile (Median): 2024-04-09
+85th Percentile: 2024-04-13
+95th Percentile: 2024-04-16
 ```
 
 The 50th percentile date means that 50% of the simulations completed by that date. That could be
@@ -196,7 +200,11 @@ Note: As long as tasks are started and complete at a consistent rate, it doesn't
 actual task durations may be much longer than the space between completed items in the data.
 
 ## Resources
+
 [Little's Law Applied to Agile & Knowledg Work](https://medium.com/swlh/littles-law-applied-in-agile-knowledge-work-part-1-81c0c1f217ec)
 
 [When Will It Be Done?](https://leanpub.com/whenwillitbedone)  Note: I've read this and Vacanti's previous book; this 
 one can be considered a revision of the first book.
+
+The podcast that convinced me I don't have to work for a giant company or have a tremendous amount of
+process rigor in order for Kanban or Monte Carlo to make sense: [Agile Bites](https://youtu.be/h3Ds80fYvdw?si=prI9pRQK7bR9IRzu)

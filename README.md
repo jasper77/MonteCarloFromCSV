@@ -1,27 +1,105 @@
 # Monte Carlo from CSV input
 
+## What is this?
+This is a command line utility you can use to run a Monte Carlo forecast to see how long a number of items might take 
+to complete given a set of dates on which similar items were completed previously. Either use it to make a forecast
+in the future for a project work breakdown, or use it to see how right or wrong the method might have been for a 
+project you've already completed.  You need two things: a CSV file containing a list of dates on which past items 
+were completed, along with the numbers of items completed on each of those dates, and the number of items you would 
+like a forecast for. You do not need to know when work items started, or how long they took to complete.
+
+This is not a completely polished utility and there is more I'd like to do with it, but it works as advertised. 
+
 ## Why use this?
-Monte Carlo simulations are one way to answer "When will it be done?" for software projects that use a Kanban workflow. It will tell you, based on historical data, future calendar dates with probabilities of completing by then. For example, 85% of the simulations completed all of the tasks by MM-DD-YYYY.    All you need are the dates upon which similar items were completed in the past, and a count of how many items were completed on those dates.
+Monte Carlo simulations are one way to answer "When will it be done?" for software projects. You can get meaningful
+results faster and with less data than alternative methods. Depending on what you track, you might not need deep
+technical deep dives in order to get useful forecasts. Since MC forecasts give you calendar dates, not sizes, they
+need less interpretation.  If you are wondering how well MC simulations might work with the sort of data you already
+have, with the workflow you already have, this utility can help answer.
+
+MC simulation tells you, based on historical data, future calendar dates with probabilities of completing by those 
+dates. For example, 85% of the simulations completed all of the tasks by MM-DD-YYYY. All you need are the dates upon which 
+similar items were completed in the past, and a count of how many items were completed on those dates. In the right
+situation, Monte Carlo forecasting can give you meaningful early projections with less effort than alternatives, and
+can be used to make more meaningful projections as a project is underway. What do we mean by "similar items?" That
+answer depends on your context. They could be simply "tasks" as long as you have a consistent way of defining tasks. 
+They could be epics, or user stories, or mini-milestones.
 
 Monte Carlo has several advantages over using story points:
 
-- If you are able to consistently break down work into "small enough" pieces, you can use MC without knowing the sizes of the individual pieces more precisely. The pieces do not need to be the same size as each other, as long as they're not too big. This is similar to a common scrum practice of "If it's bigger than an 8, break it down," so if you already do this, your data might be the right kind of data.
+- Instead of giving a single date, MC simulations account for variability and uncertainty by running multiple
+simulations with random inputs from your data set, and uses distributions to model the uncertainty.
 
-- If your work breakdowns are at a level that do no require deep technical dives and technical breakdowns, then you can use MC to make forecasts without such deep dives. That means if you regularly identify a trackable level above the technical tasks, whether they be user stories or mini milestones or whatever you call them, you can use those instead of the detailed technical tasks. And if you're able to identify that breakdown without the more time consuming technical breakdown in a meaningful way, you can use MC simulations before doing the deep dive.
+- If you are able to consistently break down work into "small enough" pieces, you can use MC without knowing the 
+sizes of the individual pieces more precisely. The pieces do not need to be the same size as each other, as long 
+as they're not too big. This is similar to a common scrum practice of "If it's bigger than an 8, break it down," 
+so if you already do this, your data might already be the right kind of data.
 
-- Monte Carlo simulates give you calendar dates. Yes, you do need to apply judgement to interpreting them, the same as you should with any forecasting method. Considering factors such as whether your team size has changed, or were there significant interruptions in the past or will there be coming up. And if you change the nature of the work item you're tracking or doing, that will effect results.
+- If your work breakdowns are at a level that do not require deep technical dives and technical breakdowns, then 
+you can use MC to make forecasts without such deep dives. That means if you regularly identify a trackable level 
+above the technical tasks, whether they be user stories or mini milestones or whatever you call them, you can use 
+those instead of the detailed technical tasks. And if you're able to identify that breakdown without the more time 
+consuming technical breakdown in a meaningful way, you can use MC simulations before doing the deep dive.
 
-Both of the above points mean that, if you have the data, you can get meaningful forecasts faster. 
+- If your story point sizes depend on knowing who will do sized work item, that can encourage teams to always have work
+items done by the people who can do them the fastest, which encourages knowledge silos and increases business risk.
 
-If you follow a common practice of loading up a sprint with tasks at the start, and aim to complete them all before the end of the sprint, instead of following a continuous flow, you'll find the ranges given by a MC forecast will be wider. Switching to a continous flow will make MC forecasts more useful.
+- Monte Carlo simulations give you calendar dates. Yes, you do need to apply judgement to interpreting them, the 
+same as you should with any forecasting method. Considering factors such as whether your team size has changed, or 
+were there significant interruptions in the past or will there be coming up. And if you change the nature of the 
+work item you're tracking or doing, that will effect results.
 
-Would you like to use past data to forecast a project you already completed, to see how close a Monte Carlo simulation came to
-reality? Would you like to make a forecast on an upcoming project? On an ongoing project?
+- As projects increase in size and complexity, where the cumulative uncertainty of many tasks can significantly 
+affect the forecast, MC simulations become more meaningful, while story points become less reliable.
+
+The above points mean that, if you have the data, you can get meaningful forecasts faster. 
+
+If you follow a common practice of loading up a sprint with tasks at the start, and aim to complete them all before 
+the end of the sprint, instead of following a continuous flow, you'll find the ranges given by a MC forecast will be 
+wider. Switching to a continous flow will make MC forecasts more useful.
+
+Would you like to use past data to forecast a project you already completed, to see how close a Monte Carlo simulation 
+came to reality? Would you like to make a forecast on an upcoming project? On an ongoing project?
 
 This is a set of scripts that will run a Monte Carlo simulation from the contents of a CSV file, from the command line. 
 
+## When is Monte Carlo suitable for project work?
+A popular misconception is that since Monte Carlo projections don't require you to differentiate between small and large
+tasks, then they only work for tasks of about the same size. While a collection of tasks of varying sizes can be 
+forecasted using Monte Carlo, a few things do need to be true for the forecasts to be meaningful:
+- The work size can't vary too much. Generally, if you've been following Scrum and you're already good at breaking down
+work that is too big, then you're already doing what you need to do; make sure the work isn't too big.
+- Little's Law is satisfied when:
+  - The rate at which new work items enter "Work in Progress" is about the same at the rate at which work exits. In 
+  other words, don't take new work faster than your ability to complete existing work.
+  - The number of work items in progress remains about the same. 
+  - The amount of time a work item spends in progress, from when you start working on it to when it's done, doesn't 
+  vary a lot. That means you don't start items and let them sit "in progress", blocked by dependencies or interrupted
+  by higher priority work, at least not regularly.
+
+In practice, these constraints mean:
+- If you have work in progress and a hot priority comes up, instead of putting an in-progress work item on hold, 
+make the hot priority the next thing to start after after completing something in progress. If you simply must interrupt 
+work in progress, such as addressing an on-call fire, that doesn't negate Monte Carlo, as long as it doesn't happen
+too often.
+- Always prioritize finishing work in progress before starting new work. If you have a team and team members make it
+a practice to see what they can do to help complete work in progress before starting new work, not only does that
+break down knowledge silos, it also improves overall team throughput while increasing the utility of MC forecasts.
+- Prioritize the oldest work first, where "oldest" is work that entered in-progress first.
+- If a work item is blocked due to an external dependency, strive to resolve that dependency. Better yet, strive to 
+make sure you don't start work on an item until external dependencies are resolved. If your workflows depends on 
+reaching a point and then pausing to wait on something external you can't control and with a high degree of variability,
+consider re-examining how you define your workflow.
+- Whenever your team size changes, such that your WIP limit (amount of work you can have in progress at the same time) 
+changes, understand that will affect forecasts.
+- Whenever anything happens to interrupt the flow, such as a holiday or vacation season, understand that will affect 
+forecasts. Neither this point nor the point above means MC can't work, it means you need to
+use common sense when deciding how to apply the forecasts.
+- The more work there is in progres at the same time, the longer it will take to finish them.
+ 
+
 ## Motivation behind this project
-I've worked for multiple companys dedicated to using Scrum, and using story points for forecasting. I was looking for a way to get early forecasts faster and without involving all the people you need for a meaningful technical breakdown and story point exercise, and a better way to update forecasts as a project progresses. I'd heard that some companies find that Kanban worked better for them, and they don't use story points; instead they make sure
+I've worked for multiple companies dedicated to using Scrum, and using story points for forecasting. I was looking for a way to get early forecasts faster and without involving all the people you need for a meaningful technical breakdown and story point exercise, and a better way to update forecasts as a project progresses. I'd heard that some companies find that Kanban worked better for them, and they don't use story points; instead they make sure
 all tasks are broken down small enough (akin to "If it's bigger than an 8, break it down or make it smaller", a common practice among
 teams that follow scrum) and then use Monte Carlo to answer the question "How long will the set of items for this project take to
 complete?" I wanted to explore how to use Monte Carlo using my own data, not a Jira plugin. This tool accomplishes that goal. 
@@ -86,7 +164,7 @@ Make a copy of the configuration file or edit the example included. Be sure it r
  - From the top level directory, you can use the included bash script to either run the simulation, or as
    a usage example.
 `$ cd src`
-`$ python3 MonteCarlo.py <config_file>`
+`$ ./mc_by_dates.py <config_file>`
 
 ## Interpreting the results:
 ```
@@ -107,7 +185,6 @@ a higher confidence.
 The 95th percentile represents a high confidence forecast.
 
 
-
 ## How it works:
 This set of scripts reads your csv file containing dates, and the numbers of items completed for each
 date in the file, into a pandas dataframe. Dates where zero items were completed are ignored.
@@ -117,3 +194,9 @@ of the items have been forecasted, and repeats that simulation the specified num
 
 Note: As long as tasks are started and complete at a consistent rate, it doesn't matter that 
 actual task durations may be much longer than the space between completed items in the data.
+
+## Resources
+[Little's Law Applied to Agile & Knowledg Work](https://medium.com/swlh/littles-law-applied-in-agile-knowledge-work-part-1-81c0c1f217ec)
+
+[When Will It Be Done?](https://leanpub.com/whenwillitbedone)  Note: I've read this and Vacanti's previous book; this 
+one can be considered a revision of the first book.

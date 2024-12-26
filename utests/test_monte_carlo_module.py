@@ -4,6 +4,8 @@ from datetime import datetime
 import sys
 import os
 
+# Run with "pytest test_monte_carlo_module.py"
+
 # Add the src directory to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
@@ -93,7 +95,7 @@ def test_large_simulation_count():
     assert '85th Percentile' in results
     assert '95th Percentile' in results
 
-data_dict1 = {
+data_dict_with_leading_zero = {
     '2023-01-01': 0,  # Start of project; no items completed on this date
     '2023-01-05': 3,  # 3 items completed on this date
     '2023-01-12': 2,
@@ -124,15 +126,8 @@ def test_ignore_zero_items_to_start():
     assert results['85th Percentile'].to_pydatetime() == expected_dates['85th Percentile']
     assert results['95th Percentile'].to_pydatetime() == expected_dates['95th Percentile']
 
-    # Expected dates when using data_dict1
-    expected_dates = {
-        '50th Percentile (Median)': datetime(2023, 3, 23),
-        '85th Percentile': datetime(2023, 4, 1),
-        '95th Percentile': datetime(2023, 4, 5),
-    }
+    results1 = mcf.simulate_completion(data_dict_with_leading_zero, forecast_items, num_simulations)
 
-    results1 = mcf.simulate_completion(data_dict1, forecast_items, num_simulations)
-
-    assert results['50th Percentile (Median)'].to_pydatetime() == expected_dates['50th Percentile (Median)']
-    assert results['85th Percentile'].to_pydatetime() == expected_dates['85th Percentile']
-    assert results['95th Percentile'].to_pydatetime() == expected_dates['95th Percentile']
+    assert results1['50th Percentile (Median)'].to_pydatetime() == expected_dates['50th Percentile (Median)']
+    assert results1['85th Percentile'].to_pydatetime() == expected_dates['85th Percentile']
+    assert results1['95th Percentile'].to_pydatetime() == expected_dates['95th Percentile']

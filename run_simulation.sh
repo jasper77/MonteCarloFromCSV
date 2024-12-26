@@ -5,5 +5,5 @@
 # named config.yaml.
 
 cd src
-python3 mc_by_dates.py ../config.yaml
+./mc_by_dates.py ../config.yaml
 

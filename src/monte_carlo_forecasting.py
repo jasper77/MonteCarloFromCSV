@@ -63,6 +63,8 @@ def simulate_completion(data_dict, forecast_items, num_simulations):
 
 
 if __name__ == "__main__":
+    # This demo is included here to help follow how these scripts work.
+
     # Example usage:
     # Historical data dictionary: {Date: Event count}
     data_dict = {

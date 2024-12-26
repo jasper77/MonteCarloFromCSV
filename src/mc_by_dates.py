@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from read_config import read_config
 from csv_importer import read_data_file
 import argparse
